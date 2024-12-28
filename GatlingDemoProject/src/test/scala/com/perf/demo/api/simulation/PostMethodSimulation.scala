@@ -1,9 +1,9 @@
-package com.perf.api
+package com.perf.demo.api.simulation
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
-class ApiTestForPostMethod extends Simulation{
+class PostMethodSimulation extends Simulation{
 
   //protocol
   val httpProtocol=http
@@ -16,7 +16,7 @@ class ApiTestForPostMethod extends Simulation{
         .post("/users")
         .header("content-type","application/json")
         .asJson
-       .body(RawFileBody("data/user.json")).asJson
+       .body(RawFileBody("testData/user.json")).asJson
 //        .body(StringBody(
 //          """
 //            |{
