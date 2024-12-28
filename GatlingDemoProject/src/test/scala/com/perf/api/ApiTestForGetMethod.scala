@@ -4,7 +4,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
 
-class ApiTest extends Simulation{
+class ApiTestForGetMethod extends Simulation{
   //Gatling script we need 3 thing
   //protocol
   val httpProtocol=http.baseUrl("https://reqres.in/api/users")
