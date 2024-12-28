@@ -25,7 +25,8 @@ class ApiTestForPostMethod extends Simulation{
             |""".stripMargin)).asJson
         .check(
           status is 201,
-        jsonPath("$.name") is "morpheus")
+          jsonPath("$.name") is "morpheus",
+          jsonPath("$.name") is "John")
          )
 
   //setup
