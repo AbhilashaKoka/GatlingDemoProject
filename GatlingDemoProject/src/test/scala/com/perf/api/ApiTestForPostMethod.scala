@@ -16,17 +16,17 @@ class ApiTestForPostMethod extends Simulation{
         .post("/users")
         .header("content-type","application/json")
         .asJson
-        .body(StringBody(
-          """
-            |{
-            |    "name": "morpheus",
-            |    "job": "leader"
-            |}
-            |""".stripMargin)).asJson
+       .body(RawFileBody("data/user.json")).asJson
+//        .body(StringBody(
+//          """
+//            |{
+//            |    "name": "morpheus",
+//            |    "job": "leader"
+//            |}
+//            |""".stripMargin)).asJson
         .check(
           status is 201,
-          jsonPath("$.name") is "morpheus",
-          jsonPath("$.name") is "John")
+          jsonPath("$.name") is "morpheus")
          )
 
   //setup
