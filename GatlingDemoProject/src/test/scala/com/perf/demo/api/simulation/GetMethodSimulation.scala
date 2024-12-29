@@ -9,7 +9,7 @@ class GetMethodSimulation extends Simulation{
   //protocol
   val httpProtocol=http.baseUrl("https://reqres.in/api/users")
   //scenario
-  val scn=scenario("Get API for single user")
+  val retrieveuserdetailsscn=scenario("Get API for single user")
     .exec(http("Single user").get("/2")
       .check(
        status.is(200),
@@ -19,7 +19,7 @@ class GetMethodSimulation extends Simulation{
 
   //setup
   setUp(
-  scn.inject(rampUsers(10).during(5))
+    retrieveuserdetailsscn.inject(rampUsers(10).during(5))
     .protocols(httpProtocol)
   )
 }

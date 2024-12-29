@@ -10,7 +10,7 @@ class PostMethodSimulation extends Simulation{
     .baseUrl("https://reqres.in/api")
 
   //scenario
-  val scn1=scenario("Create User")
+  val createuserscn1=scenario("Create User")
     .exec(
       http("Create user req")
         .post("/users")
@@ -31,7 +31,7 @@ class PostMethodSimulation extends Simulation{
 
   //setup
   setUp(
-    scn1.inject(rampUsers(5).during(5)).protocols(httpProtocol)
+    createuserscn1.inject(rampUsers(5).during(5)).protocols(httpProtocol)
   )
 
 }
