@@ -16,7 +16,7 @@ class PutMethodSimulation extends Simulation{
         .put("/users/2")
         .header("content-type","application/json")
         .asJson
-        .body(RawFileBody("testDataFeeders/user.json")).asJson
+        .body(RawFileBody("testDataFeeders/user1.json")).asJson
         //        .body(StringBody(
         //          """
         //            |{

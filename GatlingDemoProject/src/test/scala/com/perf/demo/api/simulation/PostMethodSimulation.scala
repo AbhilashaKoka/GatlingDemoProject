@@ -16,7 +16,7 @@ class PostMethodSimulation extends Simulation{
         .post("/users")
         .header("content-type","application/json")
         .asJson
-       .body(RawFileBody("testDataFeeders/user.json")).asJson
+       .body(RawFileBody("testDataFeeders/user1.json")).asJson
 //        .body(StringBody(
 //          """
 //            |{
