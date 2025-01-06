@@ -10,6 +10,7 @@ class CombinedFeederSimulation extends Simulation {
   def readFile(path: String): String = {
     Source.fromFile(path).getLines().mkString("\n")
   }
+
   // Define the CSV feeder
   val csvFeeder = csv("testDataFeeders/user.csv").circular
 
@@ -36,10 +37,21 @@ class CombinedFeederSimulation extends Simulation {
     .exec(http("Login Request")
       .post("/users")
       .body(StringBody("${requestBody}")).asJson
-      .check(status.is(201)))
+      .check(status.is(201)
+      )
+    )
 
-  // Set up the simulation
-  setUp(
-    scn.inject(atOnceUsers(10))
-  ).protocols(httpProtocol)
-}
+  //  Set up the simulation
+  //  setUp(scn.inject(atOnceUsers(10))).protocols(httpProtocol)
+  val duringSeconds: Integer = Integer.getInteger("duringSeconds", 10)
+  val constantUsers: Integer = Integer.getInteger("constantUsers", 10)
+    setUp (scn.inject(constantConcurrentUsers(constantUsers)during(duringSeconds)))
+    .protocols(httpProtocol)
+
+
+    .maxDuration(1800)
+    .assertions(
+      global.responseTime.max.lt(20000),
+      global.successfulRequests.percent.gt(95)
+    )
+ }

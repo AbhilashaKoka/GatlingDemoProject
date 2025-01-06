@@ -31,6 +31,8 @@
       <artifactId>gatling-recorder</artifactId>
       <version>${gatling.version}</version>
     </dependency>
+
+   
   </dependencies>
 
   <build>
