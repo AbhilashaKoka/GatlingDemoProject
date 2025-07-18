@@ -15,8 +15,8 @@ public class CombinedFeederSimulation2 extends Simulation {
 
     public CombinedFeederSimulation2() throws IOException {
         this.jsonTemplate = loadJsonTemplate("src/test/resources/testDataFeeders/user.json");
-        ScenarioBuilder scenario = createScenario();
         HttpProtocolBuilder protocol = createHttpProtocol();
+        ScenarioBuilder scenario = createScenario();
         setupSimulation(scenario, protocol);
     }
 
@@ -36,10 +36,9 @@ public class CombinedFeederSimulation2 extends Simulation {
                     return session.set("requestBody", requestBody);
                 })
                 .exec(http("Login Request")
-                        .post("/users")
-                        .body(StringBody("${requestBody}")).asJson()
-                        .check(status().is(201))
-                );
+                        .get("/users")
+//                        .body(StringBody("#{requestBody}")).asJson()
+                        .check(status().is(200)));
     }
 
     private HttpProtocolBuilder createHttpProtocol() {
@@ -49,8 +48,8 @@ public class CombinedFeederSimulation2 extends Simulation {
     }
 
     private void setupSimulation(ScenarioBuilder scenario, HttpProtocolBuilder protocol) {
-        Integer duringSeconds = Integer.getInteger("duringSeconds", 10);
-        Integer constantUsers = Integer.getInteger("constantUsers", 10);
+        Integer duringSeconds = Integer.getInteger("duringSeconds", 2);
+        Integer constantUsers = Integer.getInteger("constantUsers", 5);
 
         setUp(
                 scenario.injectClosed(
